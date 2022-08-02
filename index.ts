@@ -2,19 +2,16 @@ import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import { getOrCreateAssociatedTokenAccount, transfer } from "@solana/spl-token";
 import giveawayWinnerWalletAddressAndAmount from "./giveawayWinnerWalletAddressAndAmountList.json";
 import fs from "fs";
+import { devSetting, productionSetting } from "./setting";
+type NetworkType = "devnet" | "main-net" | undefined;
 (async () => {
-  const devSetting = {
-    scretKeyPath: "/home/penpen/key/test/tESTDYTzik9jE8T8MHQ5xq1M4BeKvQd4jciCKpffZZD.json",
-    tokenAddress: "HRNt3p14j5rzvY2yR4M9KQQaHkLQgu1sR3LDZggWyNb4",
-    rpcHostUrl: "https://devnet.genesysgo.net/",
-  };
-  const productionSetting = {
-    scretKeyPath: "/home/penpen/key/honnbann-azito/AZAdov297QYQuqxbC7ivJYw2jniKgqt125ugmBQ7jQqo.json",
-    tokenAddress: "HRNt3p14j5rzvY2yR4M9KQQaHkLQgu1sR3LDZggWyNb4",
-    rpcHostUrl: "https://ssc-dao.genesysgo.net/",
-  };
+  const network: NetworkType = process.argv[2] as NetworkType;
+  if (!network) {
+    console.log("引数を指定してください！！");
+    return;
+  }
 
-  const { rpcHostUrl, scretKeyPath, tokenAddress } = devSetting; //ここで本番とテストを切り替える
+  const { rpcHostUrl, scretKeyPath, tokenAddress } = network === "devnet" ? devSetting : productionSetting;
   try {
     // クラスタに接続する
     const connection = new Connection(rpcHostUrl);

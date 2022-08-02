@@ -3,9 +3,11 @@ SolanaのSPLトークンを「指定したアドレス」に「指定した量�
 
 # 使い方
 1. SPLトークンを用意する
-2. giveawayWinnerWalletAddressAndAmountList.json に「アドレス」に「配布したいWL数」を配列で書き込む（すでにサンプルを書いているのでそれを参考にしてください）
-3. index.ts の中のdevSettingとproductionSettingを変更する
-4. npm startを実行する  
+2. `giveawayWinnerWalletAddressAndAmountList.json `に「アドレス」に「配布したいWL数」を配列で書き込む（すでにサンプルを書いているのでそれを参考にしてください）
+3. `setting.ts` を編集する
+4. 実行する
+   - devnetでテストしたい場合：`npm start devnet`
+   - mainnetで実行する場合：`npm start main-net`  
 
 実行結果は以下のようになります。
 ```
