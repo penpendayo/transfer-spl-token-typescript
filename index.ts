@@ -4,6 +4,9 @@ import giveawayWinnerWalletAddressAndAmount from "./giveawayWinnerWalletAddressA
 import fs from "fs";
 import { devSetting, productionSetting } from "./setting";
 type NetworkType = "devnet" | "main-net" | undefined;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 (async () => {
   const network: NetworkType = process.argv[2] as NetworkType;
   if (!network) {
@@ -41,7 +44,7 @@ type NetworkType = "devnet" | "main-net" | undefined;
         mint,
         toWalletPublicAddress
       );
-
+      await sleep(2000);
       // 指定したトークンを、送信元→送信先に、指定した数量だけ送る
       const signature = await transfer(
         connection,
